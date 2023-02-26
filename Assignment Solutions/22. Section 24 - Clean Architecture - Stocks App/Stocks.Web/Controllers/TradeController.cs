@@ -5,6 +5,7 @@ using ServiceContracts.DTO;
 using ServiceContracts.FinnhubService;
 using ServiceContracts.StocksService;
 using StockMarketSolution.Models;
+using System.Globalization;
 using System.Text.Json;
 
 namespace StockMarketSolution.Controllers
@@ -66,7 +67,7 @@ namespace StockMarketSolution.Controllers
    //load data from finnHubService into model object
    if (companyProfileDictionary != null && stockQuoteDictionary != null)
    {
-    stockTrade = new StockTrade() { StockSymbol = companyProfileDictionary["ticker"].ToString(), StockName = companyProfileDictionary["name"].ToString(), Quantity = _tradingOptions.DefaultOrderQuantity ?? 0, Price = Convert.ToDouble(stockQuoteDictionary["c"].ToString()) };
+    stockTrade = new StockTrade() { StockSymbol = companyProfileDictionary["ticker"].ToString(), StockName = companyProfileDictionary["name"].ToString(), Quantity = _tradingOptions.DefaultOrderQuantity ?? 0, Price = Convert.ToDouble(stockQuoteDictionary["c"].ToString(), CultureInfo.InvariantCulture) };
    }
 
    //Send Finnhub token to view
